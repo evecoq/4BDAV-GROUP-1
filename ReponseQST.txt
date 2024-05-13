@@ -1,0 +1,5 @@
+3-Y a-t-il un ordre à respecter lors de la création de ces tables, si oui lequel ? Pourquoi ?
+ Oui, il y a un ordre à respecter. On doit créer d'abord les tables parentes, puis passer aux tables filles, car nous avons des clés étrangères qui relient a d'autres tables.
+
+ 5- Vider toutes vos tables. Y a-t-il un ordre à respecter ? Si oui, pourquoi ?
+Oui car nous devons suivre un ordre car certaines lignes sont référencées dans d'autres tables et pour éviter les erreurs de contraintes dintégrité référentielle.
