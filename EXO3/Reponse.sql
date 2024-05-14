@@ -1,9 +1,9 @@
 --1--
-SELECT concat(Prenom, '',nom) FROM Employer  E
+SELECT concat(FIRST_NAME, '',LAST_NAME) FROM EMPLOYEES  E
 WHERE
-E.comission is not null and 
-E.salaire BETWEEN 10000 and 15000 and 
-E.date_embauche <= '05/06/2005'
+E.COMMISSION_PCT is not null and 
+E.SALARY BETWEEN 10000 and 15000 and 
+E.HIRE_DATE <= '05/06/2005'
 
 --2--
 SELECT COALESCE(departement, 'Sans département') AS departement
