@@ -4,6 +4,13 @@ VALUES
     (1, 'Dupont', 'France', '0123456789', 'Paris', '75', 'FR'),
     (2, 'Smith', 'USA', '1234567890', 'New York', 'NY', 'US');
 
+-- Insertion dans Oracle 21 ---
+INSERT ALL
+    INTO CLI (NumCli, NomCli, Pays, Tel, Ville, Dept, Nat) VALUES (1, 'Dupont', 'France', '0123456789', 'Paris', '75', 'FR')
+    INTO CLI (NumCli, NomCli, Pays, Tel, Ville, Dept, Nat) VALUES (2, 'Smith', 'USA', '1234567890', 'New York', 'NY', 'US')
+SELECT * FROM dual;
+
+
 -- Insertion des données dans la relation COM (Commandes)
 INSERT INTO COM (NumCom, NumCli, FraisPort, DateCom, Payement) 
 VALUES 
