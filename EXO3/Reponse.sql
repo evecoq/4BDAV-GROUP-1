@@ -32,12 +32,15 @@ AND D.nom_departement ='informatique'
 
 --5--
 
-WITH MANAGER AS (
-SELECT employee_id AS id_employe,
-       CONCAT(first_name, ' ', last_name) AS nom_employe,
-       hire_date AS date_embauche_employe,
-FROM Employer )
- SELECT 
+    SELECT e1.employee_id AS id_employe,
+           CONCAT(e1.NOM, ' ', e1.prenom) AS nom_employe,
+           e1.hire_date AS date_embauche_employe,
+           e2.employee_id AS id_manager,
+           CONCAT(e2.nom, ' ', e2.prenom) AS nom_manager,
+           e2.hire_date AS date_embauche_manager
+    FROM employees e1
+    JOIN employees e2 ON e1.manager_id = e2.employee_id
+    WHERE e1.hire_date < e2.hire_date
 
 
 
