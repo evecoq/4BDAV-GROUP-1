@@ -14,29 +14,40 @@ WHERE
     E.HIRE_DATE <= TO_DATE('05/06/2005', 'DD/MM/YYYY');
 
 --2--
-SELECT COALESCE(departement, 'Sans département') AS departement
-,AVG(salaire) as salaire_moyen 
-, min(salaire) as salaire_min
-, max(salaire) as salaire_max
-,PERCENTILE_CONT( 0.5 )  WITHIN GROUP ( ORDER BY salaire) as salaire_median
-FROM employer
-GROUP BY   departement WITH ROLLUP
+SELECT 
+    COALESCE(D.DEPARTMENT_NAME, 'Sans département') AS departement,
+    ROUND(AVG(E.SALARY),2) AS salaire_moyen,
+    MIN(E.SALARY) AS salaire_min,
+    MAX(E.SALARY) AS salaire_max,
+    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY E.SALARY) AS salaire_median
+FROM 
+    employees E
+LEFT JOIN 
+    departments D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+GROUP BY 
+    ROLLUP(D.DEPARTMENT_NAME);
 
 --3--
-
-SELECT COALESCE(departement, 'Sans département') AS departement
-,AVG(salaire) as salaire_moyen 
-,PERCENTILE_CONT( 0.5 )  WITHIN GROUP ( ORDER BY salaire) as salaire_median
-FROM employer
-GROUP BY   departement WITH ROLLUP
-ORDER BY salaire_moyen  DESC ,salaire_median DESC
-LIMIT 10 
+SELECT 
+    COALESCE(D.DEPARTMENT_NAME, 'Sans département') AS departement,
+    ROUND(AVG(E.SALARY),2) AS salaire_moyen,
+    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY E.SALARY) AS salaire_median
+FROM 
+    employees E
+LEFT JOIN 
+    departments D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+GROUP BY 
+    ROLLUP(D.DEPARTMENT_NAME)
+ORDER BY 
+    salaire_moyen DESC, salaire_median DESC
+FETCH FIRST 10 ROWS ONLY;
 
 --4--
-SELECT CONCAT(nom,'',prenom)as NOM,
-from employer E inner JOIN departement D on E.fkid_departement = D.pkid_departement
-WHERE  salaire > (SELECT AVG(salaire) FROM emloyer )
-AND D.nom_departement ='informatique'
+SELECT FIRST_NAME || ' ' || LAST_NAME AS NOM_COMPLET
+FROM employees E 
+INNER JOIN departments D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+WHERE E.SALARY > (SELECT AVG(SALARY) FROM employees)
+AND D.DEPARTMENT_NAME LIKE '%IT%';
 
 --5--
 SELECT e1.employee_id AS id_employe,
