@@ -17,6 +17,12 @@ VALUES
     (101, 1, 10.50, TO_DATE('2024-05-13', 'YYYY-MM-DD'), 'Carte de crédit'),
     (102, 2, 8.20, TO_DATE('2024-05-12', 'YYYY-MM-DD'), 'PayPal');
 
+
+INSERT ALL
+    INTO COM (NumCom, NumCli, FraisPort, DateCom, Payement) VALUES (101, 1, 10.50, TO_DATE('2024-05-13', 'YYYY-MM-DD'), 'Carte de crédit')
+    INTO COM (NumCom, NumCli, FraisPort, DateCom, Payement) VALUES (102, 2, 8.20, TO_DATE('2024-05-12', 'YYYY-MM-DD'), 'PayPal')
+SELECT * FROM dual;
+
 -- Insertion des données dans la relation DET (Détails de Commande)
 INSERT INTO DET (NumCom, NumPro, Qte, Remise) 
 VALUES 
