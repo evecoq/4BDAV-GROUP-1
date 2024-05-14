@@ -1,5 +1,18 @@
 3-Y a-t-il un ordre à respecter lors de la création de ces tables, si oui lequel ? Pourquoi ?
- Oui, il y a un ordre à respecter. On doit créer d'abord les tables parentes, puis passer aux tables filles, car nous avons des clés étrangères qui relient a d'autres tables.
+Oui, il y a un ordre à respecter. On doit créer d'abord les tables parentes, puis passer aux tables filles, car nous avons des clés étrangères qui relient a d'autres tables.
+Dans ce cas avec ces 5 tables l’ordre sera suivant :
+FOU
+PRO
+CLI
+COM
+DET
 
- 5- Vider toutes vos tables. Y a-t-il un ordre à respecter ? Si oui, pourquoi ?
+
+5- Vider toutes vos tables. Y a-t-il un ordre à respecter ? Si oui, pourquoi ?
 Oui car nous devons suivre un ordre car certaines lignes sont référencées dans d'autres tables et pour éviter les erreurs de contraintes dintégrité référentielle.
+En général on commence toujours par vider les tables enfants et après - les tables parents.  Dans ce cas particulier l’ordre sera suivant : 
+1. DET
+2. COM
+3. CLI
+4. PRO
+5. FOU
