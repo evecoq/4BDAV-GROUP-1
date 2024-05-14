@@ -31,16 +31,15 @@ WHERE  salaire > (SELECT AVG(salaire) FROM emloyer )
 AND D.nom_departement ='informatique'
 
 --5--
-
-    SELECT e1.employee_id AS id_employe,
-           CONCAT(e1.NOM, ' ', e1.prenom) AS nom_employe,
-           e1.hire_date AS date_embauche_employe,
-           e2.employee_id AS id_manager,
-           CONCAT(e2.nom, ' ', e2.prenom) AS nom_manager,
-           e2.hire_date AS date_embauche_manager
-    FROM employees e1
-    JOIN employees e2 ON e1.manager_id = e2.employee_id
-    WHERE e1.hire_date < e2.hire_date
+SELECT e1.employee_id AS id_employe,
+    e1.FIRST_NAME || ' ' || e1.LAST_NAME AS nom_employe,
+    e1.hire_date AS date_embauche_employe,
+    e2.employee_id AS id_manager,
+    e2.FIRST_NAME || ' ' || e2.LAST_NAME AS nom_manager,
+    e2.hire_date AS date_embauche_manager
+FROM employees e1
+JOIN employees e2 ON e1.manager_id = e2.employee_id
+WHERE e1.hire_date < e2.hire_date;
 
 
 
