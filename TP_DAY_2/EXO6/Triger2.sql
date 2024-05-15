@@ -1,12 +1,24 @@
-CREATE OR REPLACE TRIGGER manager
-AFTER DELETE ON employé
+CREATE OR REPLACE TRIGGER supprimer_manager
+BEFORE DELETE ON Departments
 FOR EACH ROW
-BEGIN
-  IF OLD.manager = TRUE THEN
-    UPDATE departments
-    SET manager_id = NULL
-    WHERE department_id = OLD.department_id;
+DECLARE
+    CURSOR employee_cursor IS
+        SELECT employee_id
+        FROM Employees
+        WHERE department_id = :OLD.department_id; 
 
-   
-  END IF;
+    manager_id Employees.manager_id%TYPE; 
+
+BEGIN
+    FOR emp_rec IN employee_cursor LOOP
+        SELECT manager_id INTO manager_id
+        FROM Employees
+        WHERE employee_id = emp_rec.employee_id;
+
+        IF manager_id = :OLD.manager_id THEN 
+            RAISE_APPLICATION_ERROR(-20001, 'Le manager du département ne peut pas être supprimé');
+        ELSE
+            DELETE FROM Employees WHERE manager_id = manager_id; 
+        END IF;
+    END LOOP;
 END;
