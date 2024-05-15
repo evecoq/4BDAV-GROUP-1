@@ -5,9 +5,9 @@ DECLARE
     CURSOR employee_cursor IS
         SELECT employee_id
         FROM Employees
-        WHERE department_id = :OLD.department_id; -- Ajout de la clause WHERE pour sélectionner les employés du département en cours de suppression
+        WHERE department_id = :OLD.department_id; 
 
-    manager_id Employees.manager_id%TYPE; -- Correction de la déclaration de la variable manager_id
+    manager_id Employees.manager_id%TYPE; 
 
 BEGIN
     FOR emp_rec IN employee_cursor LOOP
@@ -15,10 +15,10 @@ BEGIN
         FROM Employees
         WHERE employee_id = emp_rec.employee_id;
 
-        IF manager_id = :OLD.manager_id THEN -- Comparaison avec l'ancien manager_id du département
+        IF manager_id = :OLD.manager_id THEN 
             RAISE_APPLICATION_ERROR(-20001, 'Le manager du département ne peut pas être supprimé');
         ELSE
-            DELETE FROM Employees WHERE manager_id = manager_id; -- Suppression des employés dont le manager est le manager du département
+            DELETE FROM Employees WHERE manager_id = manager_id; 
         END IF;
     END LOOP;
 END;
