@@ -1,0 +1,17 @@
+DECLARE
+    salaire_moy NUMBER;
+    age_min INT := 45;
+    age_max INT := 55;
+BEGIN
+    SELECT AVG(Salaire)
+    INTO salaire_moy
+    FROM PILOTE
+    WHERE Age BETWEEN age_min AND age_max;
+    DBMS_OUTPUT.PUT_LINE('La moyenne des salaires des pilotes âgés entre 45 et 55 ans est : ' || salaire_moy);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Aucun pilote trouvé dans la tranche d''âge spécifiée.');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erreur : ' || SQLERRM);
+END;
+
