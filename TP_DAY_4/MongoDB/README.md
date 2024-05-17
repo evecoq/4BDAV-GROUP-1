@@ -29,7 +29,7 @@ Ce projet contient un script JavaScript pour insérer des enregistrements vidéo
    mongo < insert_videos.js
    
 ### Vérification de l'insertion des données
-1. Ouvrez MongoDB Shell :
+1. Ouvrez un PowerShell et entrer :
    ```sh
    mongo
 2. Sélectionnez la base de données utilisée par le script :
